@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B42D129207ACCD7003428B4 /* TwoBitLabs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B42D128207ACCD7003428B4 /* TwoBitLabs.framework */; };
+		8B42D12A207ACCE5003428B4 /* TwoBitLabs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B42D128207ACCD7003428B4 /* TwoBitLabs.framework */; };
+		8B42D12B207ACCE5003428B4 /* TwoBitLabs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B42D128207ACCD7003428B4 /* TwoBitLabs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8BC981EA207AAB0500001EB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC981E9207AAB0500001EB5 /* AppDelegate.swift */; };
 		8BC981EC207AAB0500001EB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC981EB207AAB0500001EB5 /* ViewController.swift */; };
 		8BC981EF207AAB0500001EB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BC981ED207AAB0500001EB5 /* Main.storyboard */; };
@@ -25,7 +28,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8B42D127207ACAD8003428B4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8B42D12B207ACCE5003428B4 /* TwoBitLabs.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8B42D128207ACCD7003428B4 /* TwoBitLabs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwoBitLabs.framework; path = build/TwoBitLabs.framework; sourceTree = "<group>"; };
 		8BC981E6207AAB0500001EB5 /* TwoBitWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoBitWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC981E9207AAB0500001EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC981EB207AAB0500001EB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B42D129207ACCD7003428B4 /* TwoBitLabs.framework in Frameworks */,
+				8B42D12A207ACCE5003428B4 /* TwoBitLabs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +76,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B42D122207ACA62003428B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B42D128207ACCD7003428B4 /* TwoBitLabs.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8BC981DD207AAB0500001EB5 = {
 			isa = PBXGroup;
 			children = (
 				8BC981E8207AAB0500001EB5 /* TwoBitWeather */,
 				8BC981FD207AAB0600001EB5 /* TwoBitWeatherTests */,
 				8BC981E7207AAB0500001EB5 /* Products */,
+				8B42D122207ACA62003428B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BC98203207AAB0600001EB5 /* Build configuration list for PBXNativeTarget "TwoBitWeather" */;
 			buildPhases = (
+				8BC98209207AB23A00001EB5 /* Compile Kotlin Framework */,
 				8BC981E2207AAB0500001EB5 /* Sources */,
 				8BC981E3207AAB0500001EB5 /* Frameworks */,
 				8BC981E4207AAB0500001EB5 /* Resources */,
+				8B42D127207ACAD8003428B4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +222,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8BC98209207AB23A00001EB5 /* Compile Kotlin Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Kotlin Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "case \"$PLATFORM_NAME\" in\niphoneos)\nNAME=iphone\n;;\niphonesimulator)\nNAME=iphone_sim\n;;\n*)\necho \"Unknown platform: $PLATFORN_NAME\"\nexit 1\n;;\nesac\n\necho XXXXX\necho $NAME\necho XXXXX\n\n\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../platforms/ios\" \"build\"\nrm -rf \"$SRCROOT/build/\"\nmkdir \"$SRCROOT/build/\"\ncp -a \"$SRCROOT/../platforms/ios/build/konan/bin/$NAME/\" \"$SRCROOT/build/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8BC981E2207AAB0500001EB5 /* Sources */ = {
@@ -359,6 +407,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build",
+				);
 				INFOPLIST_FILE = TwoBitWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -376,6 +428,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build",
+				);
 				INFOPLIST_FILE = TwoBitWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

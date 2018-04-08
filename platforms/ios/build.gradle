@@ -1,0 +1,30 @@
+apply plugin: 'konan'
+
+konanArtifacts {
+    framework('TwoBitLabs', targets: ['iphone', 'iphone_sim']) {
+        enableDebug true
+        enableMultiplatform true
+
+        srcDir 'main'
+    }
+
+    //library('test-library') {
+    //    enableMultiplatform true
+    //    srcDir 'main'
+    //}
+
+    //program('shared-ios-test') {
+    //    srcDir 'test'
+    //    commonSourceSet 'test'
+    //    extraOpts '-tr'
+    //    libraries {
+    //        artifact 'test-library'
+    //    }
+    //}
+}
+
+dependencies {
+    expectedBy project(':common')
+}
+
+task test(dependsOn: run)
