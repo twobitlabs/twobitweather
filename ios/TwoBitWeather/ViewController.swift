@@ -5,7 +5,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weatherWebService = TBLWeatherWebService()
+        TBLWeatherWebService().getForecast { (forecast) -> TBLStdlibUnit in
+            print("XXXX")
+            return TBLStdlibUnit()
+        }
     }
 }
 
